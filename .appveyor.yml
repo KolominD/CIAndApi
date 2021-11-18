@@ -1,5 +1,5 @@
 image: Ubuntu  # образ для сборки
-
+  - chmod +x gradlew
 stack: jdk 11  # версия JDK
 
 branches:
@@ -14,4 +14,3 @@ install:
 
 build_script:
   - ./gradlew test --info  # запускаем тест, флаг --info позволяет выводить больше информации
-  - chmod +x gradlew
