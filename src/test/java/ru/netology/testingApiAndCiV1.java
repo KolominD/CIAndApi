@@ -3,6 +3,9 @@ package ru.netology;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.equalTo;
+
 
 public class testingApiAndCiV1 {
     @Test
@@ -16,6 +19,10 @@ public class testingApiAndCiV1 {
                 .get("/demo/accounts")
                 // Проверки
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body(matchesJsonSchemaInClasspath("accounts.schema.json"))
+                .body("[0].currency", equalTo("RUB"))
+                .body("[1].currency", equalTo("USD"))
+        ;
     }
 }
